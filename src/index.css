@@ -1,9 +1,5 @@
-@font-face {
-  font-family: 'RobotoMono';
-}
-
 * {
-  font-family: 'RobotoMono', monospace;
+  font-family: 'Roboto-Mono', monospace;
 }
 
 body {
