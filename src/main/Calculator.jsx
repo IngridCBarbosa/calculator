@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 
 import './Styles.css';
 
@@ -10,7 +10,7 @@ function Calculator() {
 
     const [displayValue, setDisplayValue] = useState('0');
     const [values, setValue] = useState([0, 0]);
-    const [operations, setOperations] = useState({});
+    const [operations, setOperations] = useState('');
     const [current, setCurrent] = useState(0);
 
     function clearMemory() {
@@ -18,7 +18,33 @@ function Calculator() {
     }
 
     function setOperation(operation) {
-        //console.log(operation);
+        if (current === 0) {
+            setOperations(operation);
+            setDisplayValue('0');
+            setCurrent(1);
+        }
+        else {
+            const value = [...values];
+
+            value[0] = eval(`${value[0]} ${operations} ${value[1]}`);
+            
+            if (operation === '=') {
+                setDisplayValue(value[0]);
+                setValue([0,0])
+                
+            } else {
+
+                value[0] = eval(`${value[0]} ${operations} ${value[1]}`);
+                setDisplayValue(value[0])
+                setValue(value);
+            }
+            value[0] = 0
+            
+
+
+
+
+        }
     }
 
     function addDigit(digit) {
@@ -31,10 +57,9 @@ function Calculator() {
 
         setDisplayValue(currentValue + digit);
 
-        if(digit !== '.'){
-            
+        if (digit !== '.') {
             const value = [...values];
-            value[current] =  parseInt(displayValue);
+            value[current] = parseInt(displayValue);
             setValue(value);
             console.log(value);
         }
